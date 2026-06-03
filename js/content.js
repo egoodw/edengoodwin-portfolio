@@ -29,8 +29,9 @@ const CONTENT = {
   orcid:       "0000-0001-5680-468X",
   orcidUrl:    "https://orcid.org/0000-0001-5680-468X",
   scholarUrl:  "https://scholar.google.com/citations?user=Pb9uWMgAAAAJ",
+  githubUrl:   "https://github.com/egoodw",
   hIndex:      "4",
-  citations:   "240+",
+  citations:   "97",
   available:   "Fall 2026",
   lastUpdated: "2026-05-07",   // ISO date shown in footer and Variation B
   siteVersion: "v. 2026.05",  // version string shown in footer
@@ -68,7 +69,7 @@ const CONTENT = {
     papers:    "07",
     models:    "03",
     talks:     "25",
-    citations: "∢100",
+    citations: "97",
     available: "Fall '26",
   },
   statLabels: {
@@ -163,7 +164,7 @@ const CONTENT = {
     inst:  "Carleton University",
     orcid: "ORCID · 0000-0001-5680-468X",
     h:     "h-index · 4",
-    cites: "citations · 100",
+    cites: "citations · 97",
     cvBtn: "⤓ CV.pdf · 184 kb",
   },
 

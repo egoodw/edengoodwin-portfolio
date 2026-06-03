@@ -63,6 +63,7 @@ function PubsSection() {
           <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)", textAlign: "right" }}>
             <a href={window.CONTENT.orcidUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-3)" }}>ORCID {window.CONTENT.orcid}</a><br/>
             <a href={window.CONTENT.scholarUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-3)" }}>Google Scholar ↗</a><br/>
+            <a href={window.CONTENT.githubUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-3)" }}>GitHub ↗</a><br/>
             updated 2026-04
           </div>
         </div>

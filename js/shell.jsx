@@ -77,7 +77,7 @@ function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <a href={window.CONTENT.scholarUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-2)" }}>Google Scholar</a>
               <a href={window.CONTENT.orcidUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-2)" }}>ORCID</a>
-              <a href="#" style={{ color: "var(--ink-2)" }}>GitHub</a>
+              <a href={window.CONTENT.githubUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-2)" }}>GitHub</a>
               <a href="#" style={{ color: "var(--ink-2)" }}>LinkedIn</a>
             </div>
           </div>
