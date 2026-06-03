@@ -20,7 +20,7 @@ const CONTENT = {
   // -------------------------------------------------------
   name:        "Eden Goodwin",
   pronouns:    "she/her or they/them",
-  role:        "Postdoctoral Fellow",         // shown in Variation B sidebar
+  role:        "Ph.D candidate",         // shown in Variation B sidebar
   institution: "Carleton University",         // shown in nav and at-a-glance
   department:  "Department of Chemistry",
   location:    "Ottawa, ON",
@@ -390,3 +390,6 @@ const CONTENT = {
 
 // Make available globally (loaded before the JSX files)
 window.CONTENT = CONTENT;
+
+// Ensure duplicate fields reference the same source value
+CONTENT.identityB.role = CONTENT.role;
