@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eden Goodwin — Atomic Layer Chemistry</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/demos.css">
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- file:// protocol warning — hidden when served correctly -->
+<div id="file-protocol-warning" style="display:none; position:fixed; inset:0; z-index:9999;
+  background:#1a1a1a; color:#f5f0e8; font-family:monospace; font-size:14px;
+  flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; padding:32px;">
+  <div style="font-size:32px">⚠</div>
+  <strong>This page must be served over HTTP — it cannot run as a local file.</strong>
+  <p style="color:#aaa; max-width:480px">Run <code style="background:#333;padding:2px 6px">./serve.sh</code> in the
+  <code>Website/main/</code> folder and open <code>http://localhost:8080/</code> in your browser.</p>
+</div>
+<script>
+  if (location.protocol === "file:") {
+    document.getElementById("file-protocol-warning").style.display = "flex";
+  }
+</script>
+
+<!-- Tweaks trigger (bottom-left) -->
+<button id="tweaks-trigger" style="
+  position: fixed; left: 24px; bottom: 24px; z-index: 100;
+  background: var(--ink); color: var(--paper); border: none;
+  padding: 10px 16px; font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.08em; cursor: pointer; text-transform: uppercase;
+">✱ Tweaks</button>
+
+<script src="vendor/react.development.js"></script>
+<script src="vendor/react-dom.development.js"></script>
+<script src="vendor/babel.min.js"></script>
+
+<script src="js/content.js"></script>
+<script type="text/babel" src="js/shell.jsx"></script>
+<script type="text/babel" src="js/variations.jsx"></script>
+<script type="text/babel" src="js/sections.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+// Tweakable defaults (editable via the Tweaks panel)
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "navy",
+  "font": "modern",
+  "theme": "dark"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [tweaks, setTweaks] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem("eg_tweaks");
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return TWEAK_DEFAULTS;
+  });
+  const [tweaksOpen, setTweaksOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    localStorage.setItem("eg_tweaks", JSON.stringify(tweaks));
+    const root = document.documentElement;
+    root.setAttribute("data-accent", tweaks.accent);
+    root.setAttribute("data-font", tweaks.font);
+    root.setAttribute("data-theme", tweaks.theme);
+    window.parent.postMessage({ type: "__edit_mode_set_keys", edits: tweaks }, "*");
+  }, [tweaks]);
+
+  // Edit-mode protocol
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (!e.data) return;
+      if (e.data.type === "__activate_edit_mode") setTweaksOpen(true);
+      if (e.data.type === "__deactivate_edit_mode") setTweaksOpen(false);
+    };
+    window.addEventListener("message", handler);
+    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
+  React.useEffect(() => {
+    const btn = document.getElementById("tweaks-trigger");
+    const toggle = () => setTweaksOpen(o => !o);
+    btn.addEventListener("click", toggle);
+    return () => btn.removeEventListener("click", toggle);
+  }, []);
+
+  return (
+    <div>
+      <TopNav active="home" />
+      <main>
+        <VariationB />
+        <PubsSection />
+        <CVSection />
+        <TeachingSection />
+      </main>
+      <Footer />
+      <TweaksPanel open={tweaksOpen} onClose={() => setTweaksOpen(false)}
+        tweaks={tweaks} setTweaks={setTweaks} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

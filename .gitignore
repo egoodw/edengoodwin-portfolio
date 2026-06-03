@@ -1,0 +1,24 @@
+# Backup files
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local development
+serve.sh
+
+# Temporary files
+*.tmp
+.cache/
+
+# Assets (stored elsewhere)
+assets/CV/
+assets/writings/
